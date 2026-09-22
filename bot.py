@@ -35,8 +35,9 @@ class Bot(commands.Bot):
             return
 
     async def event_error(self, error: Exception, data=None):
-        print(f"Fatal error: {error}")
-        sys.exit(1)
+        import traceback
+        print(f"Error: {error}")
+        traceback.print_exc()
 
     # ===== HELPERS =====
 
