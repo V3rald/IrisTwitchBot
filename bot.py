@@ -85,6 +85,10 @@ class Bot(commands.Bot):
             await ctx.send("Streamer is offline")
             return
 
+        if self.irl_mode:
+            await ctx.send("Not available during IRL stream")
+            return
+
         if self._on_cooldown("song"):
             return
 
