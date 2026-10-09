@@ -35,7 +35,23 @@ class TwitchBotTokenManager:
         self.token = data["access_token"]
         self.refresh_token = data.get("refresh_token", self.refresh_token)
         self.expires_at = time.time() + data["expires_in"] - 60
+
+        self._save_to_env()
+
         print("Bot token refreshed.")
+
+    def _save_to_env(self):
+        env_path = ".env"
+        with open(env_path, "r") as f:
+            lines = f.readlines()
+        with open(env_path, "w") as f:
+            for line in lines:
+                if line.startswith("TWITCH_TOKEN="):
+                    f.write(f"TWITCH_TOKEN={self.token}\n")
+                elif line.startswith("TWITCH_REFRESH_TOKEN="):
+                    f.write(f"TWITCH_REFRESH_TOKEN={self.refresh_token}\n")
+                else:
+                    f.write(line)
 
 
 class TwitchAppTokenManager:

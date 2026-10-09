@@ -38,6 +38,10 @@ class Bot(commands.Bot):
         print(f"Fatal error: {error}")
         sys.exit(1)
 
+    async def event_socket_closed(self):
+        print("Websocket closed — exiting for restart")
+        sys.exit(1)
+
     # ===== HELPERS =====
 
     def _on_cooldown(self, key: str) -> bool:
