@@ -38,8 +38,8 @@ class Bot(commands.Bot):
         print(f"Fatal error: {error}")
         sys.exit(1)
 
-    async def event_socket_closed(self):
-        print("Websocket closed — exiting for restart")
+    async def event_channel_join_failure(self, channel: str):
+        print(f"Failed to join channel: {channel} — exiting for restart")
         sys.exit(1)
 
     # ===== HELPERS =====
